@@ -1,0 +1,145 @@
+<p>template-control-flow works!</p>
+<h3>IF</h3>
+
+<!-- Fomar nova -->
+
+@if ( isTrue) {
+<h4>Verdadeiro novo</h4>
+} @else if(isTrue !== false) {
+<h4>Senão novo</h4>
+} @else {
+<p>else novo</p>
+}
+
+<!-- Forma antiga -->
+
+<ng-container *ngIf="isTrue; else isFalse">
+  <p>Verdadeiro antigo</p>
+</ng-container>
+<ng-template #isFalse>
+  <h4>Falso antigo</h4>
+</ng-template>
+
+
+
+<h3>FOR</h3>
+
+<!-- Fomar nova -->
+<!-- for com if -->
+@if ( loadingData | async; as data) {
+<ul>
+  @for (item of data; track $index) {
+  <li>{{ item }}</li>
+  }
+</ul>
+} @else {
+<p>Carregando... Novo</p>
+}
+
+<!-- for sem if -->
+@for (item of loadingData | async; track $index) {
+<li>{{item}}</li>
+}
+
+
+<!-- Pegando indices -->
+
+<hr>
+
+@for (
+item of itens; track item.name;
+let i = $index;
+let c = $count;
+let f = $first;
+let l = $last;
+let e = $even;
+let o = $odd;
+) {
+<p>{{ item.name }}</p>
+<p>index - {{ i }}</p>
+<p>count - {{ c }}</p>
+<p>first - {{ f }}</p>
+<p>last - {{ l }}</p>
+<p>even - {{ e }}</p>
+<p>odd - {{ o }}</p>
+}
+<hr>
+
+<ul>
+  @for (item of itens; track item.name) {
+  <li> {{ item.name }} teste</li>
+  } @empty {
+  <li> Não contém valores 2 </li>
+  }
+</ul>
+
+
+<!-- Forma antiga -->
+
+<ng-container *ngIf="loadingData | async as data; else loading">
+  <ul>
+    <ng-container *ngFor="let item of data; trackBy: trackByFn">
+      <li>{{item}}</li>
+    </ng-container>
+  </ul>
+</ng-container>
+<ng-template #loading>
+  <h4>carregando antigo</h4>
+</ng-template>
+
+
+<hr>
+
+<h3>FOR ( Antigo )</h3>
+<ng-container *ngFor="
+      let item of itens;
+      let i = index;
+      let c = count;
+      let f = first;
+      let l = last;
+      let e = even;
+      let o = odd;
+      trackBy: trackByFn
+    ">
+  <p>{{ item.name }}</p>
+  <p>index - {{ i }}</p>
+  <p>count - {{ c }}</p>
+  <p>first - {{ f }}</p>
+  <p>last - {{ l }}</p>
+  <p>even - {{ e }}</p>
+  <p>odd - {{ o }}</p>
+</ng-container>
+
+<input #name type="text">
+<button (click)="addNewName(name.value)">add name</button>
+
+
+<hr>
+
+<h3>SWITCH CASE ( Novo )</h3>
+@switch (switchCondition) {
+@case ('A') {
+<p>Sim sua letra é: A</p>
+}
+
+@case ('B') {
+<p>Sim sua letra é: B</p>
+}
+
+@default {
+Default Case.
+}
+}
+
+<hr>
+
+<hr>
+
+<h3>SWITCH CASE ( Antigo )</h3>
+<div [ngSwitch]="switchCondition">
+  <p *ngSwitchCase="'A'">Conteúdo A</p>
+  <p *ngSwitchCase="'B'">Conteúdo B</p>
+  <p *ngSwitchDefault>Conteúdo Default</p>
+</div>
+
+<hr>

@@ -1,0 +1,11 @@
+<p>angular-pipes !</p>
+<li>
+  {{ date() | date : 'dd/MM/yyyy' }}
+</li>
+<p>modo antigo</p>
+<li>
+  {{ today | date : 'dd/MM/yyyy' }}
+</li>
+<li>currency: {{ 200.5 | currency: "BRL"}}</li>
+<li>number: {{ 20000.5865 | number: "1.0-2"}}</li>
+<li>percent: {{ 0.585 | percent: "1.0-2"}}</li>
