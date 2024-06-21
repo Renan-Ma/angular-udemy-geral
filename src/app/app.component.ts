@@ -1,7 +1,7 @@
 import { PaiOuMaeComponent } from './components/comunicacao-entre-components/pai-ou-mae/pai-ou-mae.component';
 import { NewComponentComponent } from './components/new-component/new-component.component';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TemplateVariablesComponent } from './components/template/template-variables/template-variables.component';
 import { TemplateControlFlowComponent } from './components/template/template-control-flow/template-control-flow.component';
@@ -9,6 +9,10 @@ import { TemplateDeferrableViewsComponent } from './components/template/template
 import { SignalsComponent } from './components/signals/signals.component';
 import { AngularPipesComponent } from './components/pipes/angular-pipes/angular-pipes.component';
 import { ReactiveFormsComponent } from './components/reactive-forms/reactive-forms.component';
+import { ContentComponent } from './components/content/content.component';
+import { HostElementsComponent } from './components/host-elements/host-elements.component';
+import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
+import { ConsumeServiceComponent } from './components/consume-service/consume-service.component';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +27,11 @@ import { ReactiveFormsComponent } from './components/reactive-forms/reactive-for
     SignalsComponent,
     PaiOuMaeComponent,
     AngularPipesComponent,
-    ReactiveFormsComponent
+    ReactiveFormsComponent,
+    ContentComponent,
+    HostElementsComponent,
+    LifeCycleComponent,
+    ConsumeServiceComponent
   ],
   template: `
     <router-outlet />
@@ -46,8 +54,59 @@ import { ReactiveFormsComponent } from './components/reactive-forms/reactive-for
     <!-- <h3>Angular pipes</h3>
     <app-angular-pipes/> -->
 
-    <h3>Reacti Forms</h3>
-    <app-reactive-forms/>
+    <!-- <h3>Reacti Forms</h3>
+    <app-reactive-forms/> -->
+
+    <!-- <h3>ng-component</h3>
+    <app-content>
+      <header id="header">
+        <p>Header</p>
+      </header>
+      <p text>Text</p>
+      <p text>Text</p>
+      <p text>Text</p>
+      <footer class="footer">
+        <p>Footer</p>
+      </footer>
+    </app-content> -->
+
+    <!-- <h3>Host elements</h3>
+    <app-host-elements/> -->
+
+    <!--
+    <h3>Life cycle</h3>
+      *******************************************
+      // Adicione esses itens dentro do app Component
+      *******************************************
+      public number = signal(1);
+      public boolean = true;
+
+      ngOnInit(): void {
+        setInterval(() => {
+          this.number.update((oldValue) => {
+            return oldValue + 1;
+          });
+        }, 1000);
+      }
+
+      *******************************************
+      // Adicione esses itens dentro do HTML
+      *******************************************
+      @if(boolean){
+      <app-life-cycle [inputMyNumber]="number()">
+        <p #text>Text</p>
+      </app-life-cycle>
+      }
+
+      <button (click)="boolean = !boolean">Destroy Component</button>
+    -->
+
+    <app-consume-service />
+  
+
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class AppComponent{
+ 
+}
